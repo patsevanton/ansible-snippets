@@ -1,0 +1,8 @@
+---
+- hosts: all
+  name: "Check test-tools-nexus-docker-registry1.mycompany.ru"
+  tasks:
+    - name: "Check test-tools-nexus-docker-registry1.mycompany.ru"
+      register: etc_out
+      script: check-test-tools-nexus-docker-registry1.sh
+    - debug: msg="{{etc_out.stdout_lines}}"

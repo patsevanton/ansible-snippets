@@ -1,0 +1,8 @@
+---
+- name: collect hostnames
+  hosts: all
+  tasks:
+    - name: run command to get host fqdn
+      command: hostname -f
+      register: fqdn_cmd
+    - debug: msg="{{fqdn_cmd.stdout_lines}}"

@@ -1,0 +1,29 @@
+---
+- hosts: teamcity_buildagent
+  serial: 1
+  become: yes
+  remote_user: apatsev
+  tasks:
+    # - name: Remove list of packages
+    #   yum: name={{item}} state=absent
+    #   with_items:
+    #       - java-11-openjdk
+    #       - java-11-openjdk-devel
+    #       - java-11-openjdk-headless
+    #       - java-1.8.0-openjdk 
+    #       - java-1.8.0-openjdk-devel
+    #       - java-1.8.0-openjdk-headless
+    #       - jdk-ten
+
+    - name: "Stop teamcity agent" 
+      shell: /home/teamcity/agent/bin/agent.sh stop
+      become: yes
+      become_user: teamcity
+
+    - pause:
+        minutes: 1
+
+    - name: "Start teamcity agent" 
+      shell: /home/teamcity/agent/bin/agent.sh start
+      become: yes
+      become_user: teamcity

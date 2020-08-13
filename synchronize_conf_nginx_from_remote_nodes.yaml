@@ -1,0 +1,9 @@
+---
+- hosts: balancers_test
+  name: "Synchronize conf nginx from remote nodes"
+  tasks:
+    - synchronize:
+        mode: pull
+        src: /etc/nginx/conf.d
+        dest: /home/apatsev/service/ansible-playbooks/apatsev/local/{{ inventory_hostname }}
+      delegate_to: localhost

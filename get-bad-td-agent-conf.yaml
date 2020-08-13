@@ -1,0 +1,8 @@
+---
+- hosts: all
+  name: "Get bad td-agent.conf"
+  tasks:
+    - name: "get bad td-agent.conf"
+      register: etc_out
+      script: get-bad-td-agent-conf.py
+    - debug: msg="{{etc_out.stdout_lines}}"

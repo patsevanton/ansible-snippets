@@ -1,0 +1,9 @@
+---
+- hosts: all
+  name: "Get puppet conf "
+  serial: 1
+  tasks:
+    - name: "Get puppet conf via /etc/puppet/puppet.conf"
+      register: puppet_conf
+      shell: "cat /etc/puppet/puppet.conf | grep server"
+    - debug: msg="{{puppet_conf.stdout_lines}}"

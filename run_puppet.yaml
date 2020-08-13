@@ -1,0 +1,9 @@
+---
+- hosts: gitlab-runner
+  become: yes
+  remote_user: apatsev
+  tasks:
+    - name: Run Puppet agent --test
+      shell: "puppet agent --test"
+      register: command_result
+      failed_when: "'Error' in command_result.stderr"

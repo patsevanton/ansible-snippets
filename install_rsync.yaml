@@ -1,0 +1,11 @@
+---
+- hosts: balancers_test
+  become: yes 
+  become_user: root
+  become_method: sudo
+  name: install Rsync
+  tasks:
+      - name: install Rsync
+        yum:
+          name: rsync
+          state: present

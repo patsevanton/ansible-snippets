@@ -1,0 +1,31 @@
+---
+- hosts: dev-tools-minio-apatsev-cluster
+  serial: 1
+  become: yes
+  remote_user: apatsev
+  tasks:
+    - name: install minio
+      yum:
+        name: minio
+        state: present
+
+    - name: install miniocli
+      yum:
+        name: miniocli
+        state: present
+
+    - name: example copying file with owner and permissions
+      copy:
+        src: files/minioconfig
+        dest: /etc/default/minio
+        mode: 0644
+
+    - name: Start service minio, if not started
+      service:
+        name: minio
+        state: started
+
+    - name: Enable service minio, and not touch the state
+      service:
+        name: minio
+        enabled: yes

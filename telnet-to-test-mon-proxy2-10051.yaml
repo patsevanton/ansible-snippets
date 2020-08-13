@@ -1,0 +1,8 @@
+---
+- hosts: all
+  name: "telnet to test-mon-proxy2 10051"
+  tasks:
+    - name: "telnet to test-mon-proxy2 10051"
+      register: telnet-to-test-mon-proxy2-10051
+      shell: "telnet test-mon-proxy2 10051"
+    - debug: msg="{{telnet-to-test-mon-proxy2-10051.stdout_lines}}"

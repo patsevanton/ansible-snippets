@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: no
+  name: "Check /etc/zabbix/zabbix-auto.yaml"
+  tasks:
+    - name: "cat /etc/zabbix/zabbix-auto.yaml"
+      register: zabbix_auto_yaml
+      shell: "cat /etc/zabbix/zabbix-auto.yaml | grep url | grep -v https"
+    - debug: msg="{{zabbix_auto_yaml.stdout_lines}}"

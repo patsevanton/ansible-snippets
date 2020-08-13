@@ -1,0 +1,5 @@
+---
+- hosts: all
+  name: "get current target host's IP address"
+  tasks:
+    - debug: var=ansible_default_ipv4.address

@@ -1,0 +1,8 @@
+---
+- hosts: all
+  name: "get server with deploy"
+  tasks:
+    - name: "get server with deploy"
+      register: deploy_server
+      shell: "cat /etc/puppet/puppet.conf | grep server | grep deploy1"
+    - debug: msg="{{deploy_server.stdout_lines}}"

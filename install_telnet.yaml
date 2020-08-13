@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: yes 
+  become_user: root
+  become_method: sudo
+  name: install Rsync
+  tasks:
+      - name: install telnet
+        yum:
+          name: telnet
+          state: present

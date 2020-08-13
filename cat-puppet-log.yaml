@@ -1,0 +1,9 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Read /var/log/puppet/puppet.log
+      command: /usr/bin/env tail -n 30 /var/log/puppet/puppet.log
+      register: puppet_log
+
+    - debug: msg="{{ puppet_log.stdout_lines }}"

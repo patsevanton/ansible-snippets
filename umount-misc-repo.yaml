@@ -1,0 +1,20 @@
+---
+
+- hosts: gitlab-runner
+  become: yes
+  remote_user: apatsev
+  tasks:
+    - name: Unmount /misc/test-yum-repo
+      mount:
+        path: /misc/test-yum-repo
+        state: unmounted
+
+    - name: Unmount /misc/puppet-yum-repo
+      mount:
+        path: /misc/puppet-yum-repo
+        state: unmounted
+
+    - name: Unmount /misc/puppet-yum-repo-7
+      mount:
+        path: /misc/puppet-yum-repo-7
+        state: unmounted

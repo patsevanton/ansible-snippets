@@ -1,0 +1,36 @@
+---
+- hosts: all
+  serial: 1
+  become: yes
+  remote_user: apatsev
+  tasks:
+    - name: Run Puppet agent --enable
+      shell: "puppet agent --enable"
+      register: command_result
+      failed_when: "'Error' in command_result.stderr"
+
+    - name: Run Puppet agent --test
+      shell: "puppet agent --test"
+      register: command_result
+      failed_when: "'Error' in command_result.stderr"
+
+    - uri:
+        url: http://localhost:8099/hide/monitoring/selftest
+        return_content: yes
+      register: selftest
+      failed_when: "'OK' not in selftest.content"
+
+    - name: Check log if log contain error
+      shell: "tail -n10 /var/log/mycompany/hide/hide.log"
+      register: command_result
+      failed_when: "'Error' in command_result.stderr"
+
+    - name: Check log if log contain error
+      shell: "tail -n10 /var/log/mycompany/hide/hide.log"
+      register: command_result
+      failed_when: "'Error' in command_result.stderr"
+
+    - name: Check log if log contain error
+      shell: "tail -n10 /var/log/mycompany/hide/hide.log"
+      register: command_result
+      failed_when: "'Error' in command_result.stderr"

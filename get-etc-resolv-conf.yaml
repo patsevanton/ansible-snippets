@@ -1,0 +1,8 @@
+---
+- hosts: all
+  name: "Check /etc/resolv.conf"
+  tasks:
+    - name: "cat /etc/resolv.conf"
+      register: etc_issue
+      shell: "cat /etc/resolv.conf"
+    - debug: msg="{{etc_issue.stdout_lines}}"

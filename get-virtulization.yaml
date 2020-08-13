@@ -1,0 +1,13 @@
+---
+- hosts: all
+  name: "Get virtulization"
+  tasks:
+    - name: "Install virt-what"
+      yum:
+        name: virt-what
+        state: present
+
+    - name: "Get virtulization via virt-what"
+      register: virt-what
+      shell: "virt-what"
+    - debug: msg="{{virt-what.stdout_lines}}"

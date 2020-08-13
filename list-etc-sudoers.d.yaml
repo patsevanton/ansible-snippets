@@ -1,0 +1,8 @@
+---
+- hosts: all
+  name: "list /etc/sudoers.d"
+  tasks:
+    - name: "list /etc/sudoers.d"
+      register: list_etc_sudoers_d
+      shell: "ls /etc/sudoers.d"
+    - debug: msg="{{list_etc_sudoers_d.stdout_lines}}"

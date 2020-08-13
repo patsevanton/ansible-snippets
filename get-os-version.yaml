@@ -1,0 +1,8 @@
+---
+- hosts: all
+  name: "Check OS Version via /etc/redhat-release"
+  tasks:
+    - name: "cat /etc/redhat-release"
+      register: etc_issue
+      shell: "cat /etc/redhat-release"
+    - debug: msg="{{etc_issue.stdout_lines}}"

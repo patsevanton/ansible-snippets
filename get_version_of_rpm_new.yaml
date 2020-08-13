@@ -1,0 +1,21 @@
+---
+- hosts: Balancers
+  vars:
+    pkg: '0'
+  tasks:
+    - name: Check if packages are installed
+      command: rpm -q {{ item }}
+      with_items:
+         - kernel
+         - perf
+      register: rpm_check
+      failed_when: rpm_check.rc > 1
+    - set_fact: pkg=1
+      when: item.rc == 1
+      with_items: "{{ rpm_check.results }}"
+      failed_when: pkg != '1'
+    - set_fact: pkg_test=fail
+      when: pkg == '1'
+    - set_fact: pkg_test=pass
+      when: pkg == '0'
+    - debug: var=pkg_test

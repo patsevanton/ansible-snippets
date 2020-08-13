@@ -1,0 +1,12 @@
+---
+- hosts: gitlab-runner1
+  roles:
+    - franklinkim.cron
+  vars:
+    cron_tasks:
+      - name: clean system docker
+        special_time: daily
+        job: "/usr/bin/docker system prune -f"
+      - name: clean volume docker
+        special_time: daily
+        job: "/usr/bin/docker dolume prune -f"

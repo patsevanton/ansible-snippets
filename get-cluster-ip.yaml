@@ -1,0 +1,8 @@
+---
+- hosts: all
+  name: "Get Cluster ip "
+  tasks:
+    - name: "Get cluster ip via /etc/keepalived/keepalived.conf"
+      register: virtual_ipaddress
+      shell: "cat /etc/keepalived/keepalived.conf | grep -A1 virtual_ipaddress"
+    - debug: msg="{{virtual_ipaddress.stdout_lines}}"

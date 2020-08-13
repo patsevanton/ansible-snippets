@@ -1,0 +1,9 @@
+---
+- hosts: pre-frontend-balancers
+  name: "restart nginx wallarm"
+  become: yes
+  tasks:
+    - name: "restart nginx wallarm"
+      register: restart_nginx_wallarm
+      shell: "/sbin/service nginx-wallarm restart"
+    - debug: msg="{{restart_nginx_wallarm.stdout_lines}}"

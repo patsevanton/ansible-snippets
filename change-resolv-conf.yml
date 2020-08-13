@@ -1,0 +1,20 @@
+---
+
+- hosts: buildagents
+  serial: 3
+  become: yes
+  remote_user: apatsev
+  tasks:
+    - name: change resolv.conf
+      lineinfile:
+        path: /etc/resolv.conf
+        state: absent
+        regexp: 'mycompany.ru'
+
+    - name: "Build hosts file"
+      lineinfile: 
+        dest: /etc/resolv.conf
+        regexp: '.*{{ item }}$'
+        line: "search test.mycompany.ru"
+        state: present
+      with_items: '{{ play_hosts }}'

@@ -1,0 +1,18 @@
+---
+
+- hosts: teamcity_buildagent
+  become: yes
+  tasks:
+    - puppet:
+        timeout: 5m
+
+    - name: "Stop teamcity agent" 
+      shell: /home/teamcity/agent/bin/agent.sh stop
+      become_user: teamcity
+
+    - pause:
+        minutes: 1
+
+    - name: "Start teamcity agent" 
+      shell: /home/teamcity/agent/bin/agent.sh start
+      become_user: teamcity

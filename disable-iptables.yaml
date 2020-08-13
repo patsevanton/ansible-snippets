@@ -1,0 +1,10 @@
+---
+- hosts: all
+  sudo: yes
+  name: "Disable firewalld"
+  tasks:
+    - name: Stop and disable firewalld.
+      service:
+        name: iptables
+        state: stopped
+        enabled: False

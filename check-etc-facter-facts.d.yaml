@@ -1,0 +1,10 @@
+- hosts: all
+  tasks:
+  - name: Ansible check file exists example.
+    stat:
+      path: /etc/facter/facts.d
+    register: file_details
+
+  - debug:
+      msg: "The directory /etc/facter/facts.d exists"
+    when: file_details.stat.exists

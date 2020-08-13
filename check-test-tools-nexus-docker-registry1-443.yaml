@@ -1,0 +1,8 @@
+---
+- hosts: all
+  name: "Check D.main.mycompany.ru 389 port"
+  tasks:
+    - name: "Check D.main.mycompany.ru 389 port"
+      register: etc_out
+      script: check-test-tools-nexus-docker-registry1-443.sh
+    - debug: msg="{{etc_out.stdout_lines}}"

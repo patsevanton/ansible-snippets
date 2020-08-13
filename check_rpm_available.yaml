@@ -1,0 +1,26 @@
+---
+- hosts: postid-hide
+  serial: 3
+  become: yes
+  remote_user: apatsev
+  tasks:
+    - name: get atop version
+      yum:
+        list: atop
+      register: package_name_version
+    
+    - name: set atop version installed
+      set_fact:
+        package_name_version_installed: "{{ package_name_version.results|selectattr('yumstate','equalto','installed')|map(attribute='version')|list|first }}"
+
+    - debug:
+        msg: "package_name_version_installed is {{ package_name_version_installed }}"
+      when: package_name_version_installed is defined  
+
+    - name: set atop version available
+      set_fact:
+        package_name_version_available: "{{ package_name_version.results|selectattr('yumstate','equalto','available')|map(attribute='version')|list|first }}"
+
+    - debug:
+        msg: "package_name_version_available is {{ package_name_version_available }}"
+      when: package_name_version_available is defined 

@@ -1,0 +1,11 @@
+---
+- hosts: all
+  name: "Get last log puppet"
+  sudo: yes
+  gather_facts: no
+  tasks:
+    - name: "Get last log puppet"
+      register: last_log_puppet
+      script: get-last-log-puppet.py
+    - debug: msg="{{last_log_puppet.stdout_lines}}"
+

@@ -1,0 +1,11 @@
+---
+- hosts: Balancers
+  name: "Get version of RPM"
+  tasks:
+    - name: yum_command 
+      yum:
+        list=installed
+      register: yum_packages
+
+    - debug: var=item
+      with_items: "{{yum_packages|json_query('nginx[*]')}}"

@@ -1,0 +1,12 @@
+---
+- hosts: Balancers
+  name: "Get version of RPM"
+  tasks:
+    - name: "Get version of RPM"
+      shell: "`which yum` list installed | grep -E '(nginx|nginx-wallarm-master|nginx-wallarm-mycompany|nginx-wallarm-mycompany-portal)'"
+      register: package_name
+      shell: "`which yum` list installed string_to_echo | awk '{print $2}' | cut -d'-' -f1"
+      register: version_rpm
+      #changed_when: False
+    - debug: msg="{{version_rpm.stdout_lines}}"
+

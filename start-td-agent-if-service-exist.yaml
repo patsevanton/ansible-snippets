@@ -1,0 +1,5 @@
+---
+- hosts: all
+  tasks:
+  - name: Start Service
+    service: name=td-agent state=started

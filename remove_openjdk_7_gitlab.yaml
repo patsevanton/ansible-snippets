@@ -1,0 +1,9 @@
+---
+- hosts: gitlab-runner
+  become: yes
+  remote_user: apatsev
+  tasks:
+     - name: Remove list of packages
+       yum: name={{item}} state=absent
+       with_items:
+           - java-1.7.0-openjdk-headless

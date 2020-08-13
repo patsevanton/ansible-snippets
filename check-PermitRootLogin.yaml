@@ -1,0 +1,8 @@
+---
+- hosts: all
+  name: "Check PermitRootLogin in /etc/ssh/sshd_config"
+  tasks:
+    - name: "Check PermitRootLogin in /etc/ssh/sshd_config"
+      register: etc_out
+      script: check-PermitRootLogin.sh
+    - debug: msg="{{etc_out.stdout_lines}}"

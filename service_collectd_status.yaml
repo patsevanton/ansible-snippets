@@ -1,0 +1,11 @@
+---
+- hosts: all
+  name: "service collectd status"
+  tasks:
+    - name: service collectd status
+      shell: /sbin/service collectd status
+      register: services_state
+
+    - name: Debug
+      debug:
+        var: services_state

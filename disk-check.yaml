@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: no
+  name: "Check disk space on /var"
+  tasks:
+    - name: "Check disk space on /var"
+      register: disk_space_on_var
+      shell: "df -h | grep var"
+    - debug: msg="{{disk_space_on_var.stdout_lines}}"

@@ -1,0 +1,19 @@
+---
+- name: Find files bigger than 400mb in size
+  hosts: all
+  tasks:
+   - name : Find files bigger than 400mb in size
+     become: true
+     find:
+       paths: /var/log
+       file_type: file
+       size: 400m
+       recurse: yes
+       excludes: 'lastlog'
+     register: output
+
+   - debug:
+       msg:
+       - "Path: '{{ output.files[0].path }}' "
+       - "Size: '{{ output.files[0].size|filesizeformat }}' "
+
